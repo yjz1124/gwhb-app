@@ -8,10 +8,11 @@ source.include_exts = py,png,jpg,kv,atlas,ttf,json,txt,xml
 
 version = 1.0
 
-# kivy 依赖 requests → requests 新版依赖 charset-normalizer（有平台专用轮子，
-# 在 p4a 内建环境解析/安装必炸）。钉在 2.25.1（依赖 chardet，纯 Python 轮子），
-# 整条依赖链全部纯 Python，绕开平台轮子问题
-requirements = python3,kivy,requests==2.25.1,chardet==4.0.0
+# 依赖链问题：charset-normalizer 3.4+ 发布了 android 平台轮子，p4a 解析必选中它，
+# 但装不进 Linux 构建环境（"not a supported wheel"）。解法在 workflow 里用
+# PIP_CONSTRAINT 全局钉 charset-normalizer==3.3.2（无安卓轮子的最后版本）。
+# 注意：不要在这里钉 requests/charset-normalizer —— 会和 kivy 依赖链解析冲突。
+requirements = python3,kivy
 
 orientation = portrait
 fullscreen = 0

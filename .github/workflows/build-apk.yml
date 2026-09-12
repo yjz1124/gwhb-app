@@ -20,6 +20,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Create pip constraints (charset-normalizer 安卓轮子规避)
+        run: |
+          echo "charset-normalizer==3.3.2" > /tmp/constraints.txt
+          echo "PIP_CONSTRAINT=/tmp/constraints.txt" >> $GITHUB_ENV
+
       - name: Install system deps
         run: |
           sudo apt-get update
