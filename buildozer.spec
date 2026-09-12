@@ -8,9 +8,10 @@ source.include_exts = py,png,jpg,kv,atlas,ttf,json,txt,xml
 
 version = 1.0
 
-# requests 依赖的 charset-normalizer 在较新版本会解析出平台轮子（cp314-android），
-# 在 p4a 内建环境里装不上 → 固定 2.1.1（只有纯 Python 轮子 py3-none-any，任何平台都能装）
-requirements = python3,kivy,charset-normalizer==2.1.1
+# kivy 依赖 requests → requests 新版依赖 charset-normalizer（有平台专用轮子，
+# 在 p4a 内建环境解析/安装必炸）。钉在 2.25.1（依赖 chardet，纯 Python 轮子），
+# 整条依赖链全部纯 Python，绕开平台轮子问题
+requirements = python3,kivy,requests==2.25.1,chardet==4.0.0
 
 orientation = portrait
 fullscreen = 0
